@@ -1,8 +1,3 @@
-from lib2to3.pgen2 import grammar
-
-
-recursiveCalls = 0
-
 def noLeftRecursion(grammar):
     noTerminals = grammar.keys()
     auxGrammar = dict()
