@@ -1,0 +1,4 @@
+{
+    "A": [["B", "uno"], ["dos"]],
+    "B": [["tres"], ["cuatro", "A"], ["EPSILON"]]
+}

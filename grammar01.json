@@ -1,7 +1,0 @@
-{
-    "S": [["A", "uno", "B", "C"], ["S", "dos"]],
-    "A": [["B", "C", "D"], ["A", "tres"], ["EPSILON"]],
-    "B": [["D", "cuatro", "C", "tres"], ["EPSILON"]],
-    "C": [["cinco", "D", "B"], ["EPSILON"]],
-    "D": [["seis"], ["EPSILON"]]
-}
