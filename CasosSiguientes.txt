@@ -1,0 +1,13 @@
+1. El ultimo es un terminal, retorna el terminal
+2. El ultimo es un no terminal, retorna primeros del no terminal
+A -> ab
+siguientes(b)
+3. Cuando b está al final de la regla, siguientes(A)
+
+Si A == b saltar.
+
+
+
+
+
+

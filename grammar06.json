@@ -1,0 +1,9 @@
+{
+    "S": [["exp", "STOP"]],
+    "exp": [["term", "exptail"]],
+    "exptail": [["EPSILON"], ["OPA", "term", "exptail"]],
+    "term": [["sfactor", "termtail"]],
+    "termtail": [["EPSILON"], ["OPM", "factor", "termtail"]],
+    "sfactor": [["OPA", "factor"], ["factor"]],
+    "factor": [["NUM"], ["LP", "exp", "RP"]]
+}

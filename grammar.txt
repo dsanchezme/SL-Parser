@@ -1,0 +1,55 @@
+codigo -> nombre declaracion main subrutina_ 
+nombre -> programa id | EPSILON 
+declaracion -> var declaracion_contenido_var declaracion | tipos declaracion_contenido_tipos declaracion | const declaracion_contenido_const declaracion | EPSILON 
+declaracion_contenido_const -> id tk_asignacion expresion mas_declaraciones_const 
+declaracion_contenido_tipos -> id tk_dos_puntos tipo_dato mas_declaraciones_tipos 
+declaracion_contenido_var -> id otros_id tk_dos_puntos tipo_dato mas_declaraciones_var 
+valor -> id valor_aux | variable 
+valor_aux -> llamada_subrutina | id_arreglo_registro | EPSILON 
+variable -> tk_numero | tk_cadena | TRUE | FALSE | SI | NO | signo variable_aux 
+variable_aux -> id | tk_numero 
+signo -> tk_suma | tk_resta 
+otros_id -> tk_coma id otros_id | EPSILON 
+tipo_dato -> id | cadena | logico | numerico | registro tk_llave_izquierda declaracion_contenido_var tk_llave_derecha | vector tk_corchete_izquierdo tamano_arreglo tk_corchete_derecho tipo_dato | matriz tk_corchete_izquierdo tamano_arreglo mas_tamano_arreglo tk_corchete_derecho tipo_dato 
+tamano_arreglo -> tk_numero | tk_multiplicacion | id 
+mas_tamano_arreglo -> tk_coma tamano_arreglo mas_tamano_arreglo | EPSILON 
+mas_declaraciones_var -> punto_y_coma_opcional declaracion_contenido_var | EPSILON 
+mas_declaraciones_tipos -> punto_y_coma_opcional declaracion_contenido_tipos | EPSILON 
+mas_declaraciones_const -> punto_y_coma_opcional declaracion_contenido_const | EPSILON 
+main -> inicio sentencias fin 
+main_subrutina -> inicio sentencias sentencia_retorna_main fin 
+sentencias -> sentencia punto_y_coma_opcional sentencias | EPSILON 
+sentencia -> id id_casos | condicional | ciclo_mientras | sentencia_eval | ciclo_desde | ciclo_repetir 
+sentencias_internas -> sentencia_interna punto_y_coma_opcional sentencias_internas | EPSILON 
+sentencia_interna -> id id_casos | condicional | ciclo_mientras | sentencia_eval | ciclo_desde | ciclo_repetir 
+id_casos -> asignacion | llamada_subrutina | id_arreglo_registro asignacion 
+punto_y_coma_opcional -> tk_punto_y_coma | EPSILON 
+expresion -> variable expresion_aux | tk_parentesis_izquierdo expresion tk_parentesis_derecho expresion_aux | not expresion expresion_aux | id valor_aux expresion_aux | valores_vector expresion_aux 
+expresion_aux -> operador expresion | EPSILON 
+valores_vector -> tk_llave_izquierda posibles_valores_vector mas_valores_vector tk_llave_derecha 
+posibles_valores_vector -> valor | valores_vector | EPSILON 
+mas_valores_vector -> tk_coma posibles_valores_vector mas_valores_vector | EPSILON 
+id_arreglo_registro -> tk_corchete_izquierdo expresion mas_parametros tk_corchete_derecho mas_pos_valor | tk_punto id mas_pos_valor 
+mas_pos_valor -> id_arreglo_registro | EPSILON 
+operador -> tk_modulo | tk_multiplicacion | tk_potenciacion | tk_resta | tk_suma | tk_division | tk_igual_que | tk_menor | tk_distinto_de | tk_menor_igual | tk_mayor | tk_mayor_igual | and | or 
+asignacion -> tk_asignacion expresion 
+condicional -> si tk_parentesis_izquierdo expresion tk_parentesis_derecho tk_llave_izquierda sentencias_internas mas_condicionales tk_llave_derecha 
+mas_condicionales -> sino condicional_ | EPSILON 
+condicional_ -> si tk_parentesis_izquierdo expresion tk_parentesis_derecho sentencias_internas mas_condicionales | sentencias_internas | EPSILON 
+ciclo_mientras -> mientras tk_parentesis_izquierdo expresion tk_parentesis_derecho tk_llave_izquierda sentencias_internas tk_llave_derecha 
+sentencia_eval -> eval tk_llave_izquierda caso tk_parentesis_izquierdo expresion tk_parentesis_derecho sentencias_internas mas_casos_eval tk_llave_derecha 
+mas_casos_eval -> caso tk_parentesis_izquierdo expresion tk_parentesis_derecho sentencias_internas mas_casos_eval | sino sentencias_internas | EPSILON 
+ciclo_desde -> desde id tk_asignacion expresion hasta expresion paso_opt tk_llave_izquierda sentencias_internas tk_llave_derecha 
+paso_opt -> paso expresion | EPSILON 
+llamada_subrutina -> tk_parentesis_izquierdo parametros tk_parentesis_derecho 
+parametros -> expresion mas_parametros | EPSILON 
+mas_parametros -> tk_coma expresion mas_parametros | EPSILON 
+sentencia_retorna_subrutina -> retorna valor_retorno | EPSILON 
+sentencia_retorna_main -> retorna valor_retorno | EPSILON 
+valor_retorno -> tk_parentesis_izquierdo expresion tk_parentesis_derecho | expresion | tipo_dato 
+ciclo_repetir -> repetir sentencias_internas hasta tk_parentesis_izquierdo expresion tk_parentesis_derecho 
+subrutina_ -> subrutina id tk_parentesis_izquierdo param_subrutina tk_parentesis_derecho sentencia_retorna_subrutina declaracion main_subrutina subrutina_ | EPSILON 
+param_subrutina -> param_ref id otros_id tk_dos_puntos tipo_dato mas_param_subrutina | EPSILON 
+mas_param_subrutina -> punto_y_coma_opcional_subrutina 
+punto_y_coma_opcional_subrutina -> tk_punto_y_coma param_ref id otros_id tk_dos_puntos tipo_dato mas_param_subrutina | EPSILON 
+param_ref -> ref | EPSILON 

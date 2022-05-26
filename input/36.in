@@ -1,0 +1,8 @@
+var
+k : numerico
+inicio
+desde k=1 hasta 10
+{
+imprimir ("\n", k, " :\t", k^2)
+}
+fin
